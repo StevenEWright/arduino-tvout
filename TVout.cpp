@@ -48,14 +48,33 @@
  *	4 if there is not enough memory.
  */
 char TVout::begin(uint8_t mode) {
-		
-	return begin(mode,128,96);
+  return begin(NULL,mode,128,96);
 } // end of begin
 
+/* Call this to start video output with the default screen buffer.
+ * 
+ * Arguments:
+ *	mode:
+ *		The video standard to follow:
+ *		PAL		=1	=_PAL
+ *		NTSC	=0	=_NTSC
+ *
+ * Returns:
+ *	0 if no error.
+ *	4 if there is not enough memory.
+ */
+char TVout::begin(uint8_t mode, uint8_t x, uint8_t y) {
+  return begin(NULL,mode,x,y);
+} // end of begin
 
 /* call this to start video output with a specified resolution.
  *
  * Arguments:
+ *  screenBuffer:
+ *    Optional pointer to an existing screen buffer.
+ *    Pass NULL to allow the library to create it's own buffer.
+ *    The buffer must be sized appropriately to represent a bit-mapped monochrome pixel buffer,
+ *      aligned on single-byte-boundaries to the beginning of each line.
  *	mode:
  *		The video standard to follow:
  *		PAL		=1	=_PAL
@@ -71,14 +90,13 @@ char TVout::begin(uint8_t mode) {
  *		2 if y is to large (NTSC only cannot fill PAL vertical resolution by 8bit limit)
  *		4 if there is not enough memory for the frame buffer.
  */
-char TVout::begin(uint8_t mode, uint8_t x, uint8_t y) {
-	
+char TVout::begin(unsigned char *screenBuffer, uint8_t mode, uint8_t x, uint8_t y) {
 	// check if x is divisable by 8
 	if ( !(x & 0xF8))
 		return 1;
 	x = x/8;
 		
-	screen = (unsigned char*)malloc(x * y * sizeof(unsigned char));
+  screen = screenBuffer ?: (unsigned char*)malloc(x * y * sizeof(unsigned char));
 	if (screen == NULL)
 		return 4;
 		

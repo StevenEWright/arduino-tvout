@@ -75,6 +75,7 @@ public:
 	
 	char begin(uint8_t mode);
 	char begin(uint8_t mode, uint8_t x, uint8_t y);
+  char begin(unsigned char *screenBuffer, uint8_t mode, uint8_t x, uint8_t y);
 	void end();
 	
 	//accessor functions
