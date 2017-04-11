@@ -8,6 +8,8 @@ In this branch I have removed all of the 'convenience' features, since these fea
 
 Currently the output is NTSC or PAL at a resolution of 128x96 by default.
 
+## Device Compatibility
+
 The library currently works on ATmega168,328,1280,2560,644p,1284p,32U4,AT90USB1286 and more can be added by editing `spec/hardware_setup.h`.
 
 There are some timing issues with the m1284p, may be related to sanguino core.
@@ -21,7 +23,7 @@ m32u4       B 5   B 4    B 7    Leonardo         9     8        11
 AT90USB1286 B 5   F 7    B 4     --              --    --       --
 ```
 
-##Connections
+## Connections
 
 SYNC is on OCR1A and AUDIO is on OCR2A (except on the Arduino Leonardo, where AUDIO is on OCR0A)
 
@@ -29,7 +31,7 @@ There are some timing issues with the m1284p, may be related to sanguino core.
 
 On NG, Decimila, UNO and Nano the sync is pin 9, video on 7 and audio on 11. On Mega2560	sync is pin 11, video is on A7(D29)	and audio is on pin 10.
 
-##Examples
+## Examples
 
 https://youtu.be/MEg_V4YZDh0
 
