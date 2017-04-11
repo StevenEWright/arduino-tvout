@@ -2,36 +2,40 @@
 
 This is a library for generating composite video on an ATmega microcontroller.
 
-This is a branch of the (Avamander/arduino-tvout)[https://github.com/Avamander/arduino-tvout] branch of the original TVout library.
+The output is NTSC or PAL at a resolution of 128x96 by default.
 
-In this branch I have removed all of the 'convenience' features, since these features are generally implemented in my own code.
+This is a branch of the [Avamander/arduino-tvout](https://github.com/Avamander/arduino-tvout) branch of the original TVout library.
 
-Currently the output is NTSC or PAL at a resolution of 128x96 by default.
+In this branch I have removed all of the 'convenience' features for handling graphics, text, and audio since these features are generally implemented in my own code. This reduces the library to a background task which references bit-mapped pixel data.
 
 ## Device Compatibility
 
-The library currently works on ATmega168,328,1280,2560,644p,1284p,32U4,AT90USB1286 and more can be added by editing `spec/hardware_setup.h`.
+The library currently works on ATmega168,328,1280,2560,644p,1284p,32U4, and AT90USB1286.
+
+More can be added by editing `spec/hardware_setup.h`.
 
 There are some timing issues with the m1284p, may be related to sanguino core.
 
 ```
-MCU         SYNC  VIDEO  AUDIO  Arduino          SYNC  VIDEO    AUDIO
-m168,m328   B 1   D 7    B 3    NG,Decimila,UNO  9     7        11
-m1280,m2560 B 5   A 7    B 4    Mega             11    A7(D29)  10
-m644,m1284p D 5   A 7    D 7    sanguino         13    A7(D24)  8
-m32u4       B 5   B 4    B 7    Leonardo         9     8        11
-AT90USB1286 B 5   F 7    B 4     --              --    --       --
+MCU         SYNC  VIDEO  Arduino          SYNC  VIDEO
+m168,m328   B 1   D 7    NG,Decimila,UNO  9     7
+m1280,m2560 B 5   A 7    Mega             11    A7(D29)
+m644,m1284p D 5   A 7    sanguino         13    A7(D24)
+m32u4       B 5   B 4    Leonardo         9     8
+AT90USB1286 B 5   F 7    --              --    --
 ```
 
 ## Connections
 
-SYNC is on OCR1A and AUDIO is on OCR2A (except on the Arduino Leonardo, where AUDIO is on OCR0A)
+`SYNC` is on `OCR1A` and `AUDIO` is on `OCR2A` (except on the Arduino Leonardo, where `AUDIO` is on `OCR0A`)
 
-There are some timing issues with the m1284p, may be related to sanguino core.
+There are some timing issues with the m1284p, which may be related to sanguino core.
 
-On NG, Decimila, UNO and Nano the sync is pin 9, video on 7 and audio on 11. On Mega2560	sync is pin 11, video is on A7(D29)	and audio is on pin 10.
+On NG, Decimila, UNO and Nano `SYNC` is pin 9 and `VIDEO` is on 7. On Mega2560 `SYNC` is pin 11, `VIDEO` is on `A7(D29)`.
 
 ## Examples
+
+These are examples of the original TVout library.
 
 https://youtu.be/MEg_V4YZDh0
 

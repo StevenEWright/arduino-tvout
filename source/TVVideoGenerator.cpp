@@ -79,12 +79,12 @@ static void inline wait_until(uint8_t time);
 static int renderLine;
 
 void TVVideoGeneratorBegin(uint8_t mode, uint8_t width, uint8_t height, uint8_t *screenBuffer) {
-  display.screen = scrnptr;
-  display.hres = x;
-  display.vres = y;
+  display.screen = screenBuffer;
+  display.hres = width;
+  display.vres = height;
   display.frames = 0;
 
-  if (mode)
+  if (mode == TVFormatPAL)
     display.vscale_const = _PAL_LINE_DISPLAY / display.vres - 1;
   else
     display.vscale_const = _NTSC_LINE_DISPLAY / display.vres - 1;
